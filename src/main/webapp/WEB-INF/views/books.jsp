@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link href="./resources/css/bootstrap.min.css" rel="stylesheet">
+<link href="<c:url value="/resources/css/bootstrap.min.css"/>" rel="stylesheet">
 <title>도서 목록</title>
 </head>
 

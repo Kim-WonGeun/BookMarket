@@ -21,7 +21,7 @@ public class BookRepositoryImpl implements BookRepository {
 								+ "개발할 때 필요한 C# 기초 문법을 익히고 기본기를 탄탄하게 다지는 것이 목적이다."
 							);
 		book1.setPublisher("길벗");
-		book1.setCategory("IT 전문서");
+		book1.setCategory("IT전문서");
 		book1.setUnitsInStock(10000);
 		book1.setReleaseDate("2020/05/29");
 	
@@ -34,7 +34,7 @@ public class BookRepositoryImpl implements BookRepository {
 								+ "실무에 참고하거나 당장 적용할 수 있다."
 							);
 		book2.setPublisher("길벗");
-		book2.setCategory("IT 전문서");
+		book2.setCategory("IT전문서");
 		book2.setUnitsInStock(10000);
 		book2.setReleaseDate("2020/07/25");		
 		
@@ -46,7 +46,7 @@ public class BookRepositoryImpl implements BookRepository {
 								+ "애니메이션과 인터랙션을 적용한 프로토타이핑을 학습합니다."
 							);
 		book3.setPublisher("길벗");
-		book3.setCategory("IT활용");
+		book3.setCategory("IT활용서");
 		book3.setUnitsInStock(1000);
 		book3.setReleaseDate("2019/05/29");		
 		
@@ -62,5 +62,23 @@ public class BookRepositoryImpl implements BookRepository {
 		// TODO Auto-generated method stub
 		return listOfBooks;
 	}
+
+
+	@Override
+	public List<Book> getBookListByCategory(String category) {
+		// TODO Auto-generated method stub
+		List<Book> booksByCategory = new ArrayList<Book>();		
+		
+		for(int i = 0; i < listOfBooks.size(); i++) {
+			Book book = listOfBooks.get(i);
+			
+			if(category.equalsIgnoreCase(book.getCategory())) {
+				booksByCategory.add(book);
+			}
+		}	
+		
+		return booksByCategory;
+	}
+	
 
 }

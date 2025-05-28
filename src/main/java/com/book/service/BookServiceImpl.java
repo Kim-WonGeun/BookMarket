@@ -10,12 +10,20 @@ import com.book.repository.BookRepository;
 public class BookServiceImpl implements BookService {
 
 	@Autowired
-	private BookRepository bookrepository;
+	private BookRepository bookRepository;
 	
 	@Override
 	public List<Book> getAllBookList() {
 		// TODO Auto-generated method stub
-		return bookrepository.getAllBookList();
+		return bookRepository.getAllBookList();
+	}
+
+	@Override
+	public List<Book> getBookListByCategory(String category) {
+		// TODO Auto-generated method stub
+		List<Book> bookByCategory = bookRepository.getBookListByCategory(category);
+		
+		return bookByCategory;
 	}
 
 }
