@@ -1,8 +1,13 @@
 package com.book.repository;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
 import org.springframework.stereotype.Repository;
+
 import com.book.domain.Book;
 
 @Repository
@@ -77,6 +82,55 @@ public class BookRepositoryImpl implements BookRepository {
 			}
 		}	
 		
+		return booksByCategory;
+	}
+
+
+	@Override
+	public Set<Book> getBookListByFilter(Map<String, List<String>> filter) {
+		// TODO Auto-generated method stub
+		Set<Book> booksByPublisher = new HashSet<Book>();
+		Set<Book> booksByCategory = new HashSet<Book>();
+		
+		Set<String> booksByFilter = filter.keySet();
+		
+		System.out.println("###getBookListByFilter Start #####");
+		System.out.println(filter.toString());
+		
+		if(booksByFilter.contains("publisher")) {
+			
+			System.out.println("###publisher Start #####");
+			
+			for(int j = 0; j < filter.get("publisher").size(); j++) {
+				String publisherName = filter.get("publisher").get(j);
+				
+				for(int i = 0; i <listOfBooks.size(); i++) {
+					Book book = listOfBooks.get(i);
+					
+					if(publisherName.equalsIgnoreCase(book.getPublisher())) {
+						booksByPublisher.add(book);
+					}
+					
+				}
+				
+			}
+			
+		}
+		
+		if(booksByFilter.contains("category")) {
+			
+			System.out.println("###category Start #####");
+			
+			for(int i = 0; i < filter.get("category").size(); i++) {
+				String category = filter.get("category").get(i);
+				
+				List<Book> list = getBookListByCategory(category);
+				booksByCategory.addAll(list);
+			}
+			
+		}
+		
+		booksByCategory.retainAll(booksByPublisher);
 		return booksByCategory;
 	}
 	

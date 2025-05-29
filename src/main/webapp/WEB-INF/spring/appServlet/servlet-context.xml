@@ -24,4 +24,8 @@
         <property name="suffix" value=".jsp" />
     </bean>
 
+<!-- 	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping">
+	    <property name="removeSemicolonContent" value="false"/>
+	</bean>
+ -->
 </beans>
