@@ -94,12 +94,8 @@ public class BookRepositoryImpl implements BookRepository {
 		
 		Set<String> booksByFilter = filter.keySet();
 		
-		System.out.println("###getBookListByFilter Start #####");
-		System.out.println(filter.toString());
 		
 		if(booksByFilter.contains("publisher")) {
-			
-			System.out.println("###publisher Start #####");
 			
 			for(int j = 0; j < filter.get("publisher").size(); j++) {
 				String publisherName = filter.get("publisher").get(j);
@@ -133,6 +129,30 @@ public class BookRepositoryImpl implements BookRepository {
 		booksByCategory.retainAll(booksByPublisher);
 		return booksByCategory;
 	}
-	
 
+
+	@Override
+	public Book getBookById(String bookId) {
+		// TODO Auto-generated method stub
+		Book bookInfo = null;
+		
+		for(int i = 0; 0 < listOfBooks.size(); i++) {
+			Book book = listOfBooks.get(i);
+			
+			if(book != null && book.getBookId() != null && book.getBookId().equals(bookId) ) {
+				bookInfo = book;
+				break;
+			}
+			
+		}
+		
+		if(bookInfo == null) {
+			throw new IllegalArgumentException("도서 ID가" + bookId + "인 해당 도서를 찾을 수 없습니다.");
+			
+		}
+		
+		return bookInfo;
+	}
+	
+	
 }
