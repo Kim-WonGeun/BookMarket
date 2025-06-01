@@ -153,6 +153,14 @@ public class BookRepositoryImpl implements BookRepository {
 		
 		return bookInfo;
 	}
+
+
+	@Override
+	public void setNewBook(Book book) {
+		// TODO Auto-generated method stub
+		listOfBooks.add(book);
+		
+	}
 	
 	
 }

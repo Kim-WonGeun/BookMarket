@@ -23,13 +23,15 @@
 
 	<div class="jumbotron">
 		<div class="container">
-			<h1 class="display-3">도서 등</h1>
+			<h1 class="display-3">도서 등록</h1>
 		</div>
 	</div>
 
 	<div class="container">
-		<form:form modelAttribute="book" class="form-horizontal">
+		<form:form modelAttribute="NewBook" class="form-horizontal">
 		<fieldset>
+		
+		<legend>${addTitle}</legend>
 		
 		<div class="form-group row">
 			<label class="col-sm-2 control-label">도서ID</label>
