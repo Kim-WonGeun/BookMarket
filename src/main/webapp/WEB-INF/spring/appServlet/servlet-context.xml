@@ -9,6 +9,10 @@
                            http://www.springframework.org/schema/mvc
                            http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="10240000"/>
+	</bean>
+
     <!-- 컴포넌트 스캔 설정 -->
     <context:component-scan base-package="com.book.*" />
 
@@ -17,6 +21,9 @@
 
     <!-- 정적 자원 매핑 -->
     <mvc:resources mapping="/resources/**" location="/resources/" />
+
+	<!-- 업로드된 이미지 매핑 -->
+	<mvc:resources mapping="/images/**" location="file:/Users/wg/uploads/" />
 
     <!-- ViewResolver 설정 -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">

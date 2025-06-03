@@ -30,7 +30,17 @@
 		<div class="row" align="center">
 			<c:forEach items="${bookList}" var="book">
 				<div class="col-md-4">
-				<img src="<c:url value="/resources/images/${book.bookId}.png"/>" style="width:60%"/>
+
+				<c:choose>
+					<c:when test="${book.getBookImage() == null}">
+						<%-- <img src="<c:url value="/Users/wg/uploads/${book.bookId}.png"/>" style="width:60%"/> --%>
+						<img src="<c:url value='/images/${book.bookId}.png' />" style="width:60%" />
+					</c:when>
+					<c:otherwise>
+						<img src="<c:url value="/Users/wg/uploads/${book.getBookImage().getOriginalFilename()}"/>" style="width:60%"/>
+					</c:otherwise>
+				</c:choose>
+				
 					<h3>${book.name}</h3>
 					<p>${book.author}
 						<br>${book.publisher} | ${book.releaseDate}

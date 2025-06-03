@@ -37,7 +37,8 @@
 		
 		<br><br>
 	
-		<form:form modelAttribute="NewBook" class="form-horizontal">
+		<form:form modelAttribute="NewBook" action="./add?${_csrf.parameterName}=${_csrf.token}" class="form-horizontal" enctype="multipart/form-data">
+		
 		<fieldset>
 		
 		<legend>${addTitle}</legend>
@@ -111,6 +112,13 @@
 				<form:radiobutton path="condition" value="New"/>New
 				<form:radiobutton path="condition" value="Old"/>Old
 				<form:radiobutton path="condition" value="E-Book"/>E-Book
+			</div>
+		</div>
+		
+		<div class="form-group row">
+			<label class="col-sm-2 cpntrol-label">도서이미지</label>
+			<div class="col-sm-7">
+				<form:input path="bookImage" type="file" class="form-control"/>
 			</div>
 		</div>
 		

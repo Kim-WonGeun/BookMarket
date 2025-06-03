@@ -1,5 +1,7 @@
 package com.book.domain;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class Book {
 	
 	private String bookId;			// 도서 ID
@@ -11,7 +13,8 @@ public class Book {
 	private String category;		// 분류
 	private long unitsInStock;		// 재고 수
 	private String releaseDate;		// 출판일(월/년)
-	private String condition;		// 신규 도서 또는 중고 도서 또는 전자
+	private String condition;		// 신규 도서 또는 중고 도서 또는 전자책
+	private MultipartFile bookImage;	// 도서 이미지
 
 	// 기본 생성
 	public Book() {	
@@ -105,6 +108,14 @@ public class Book {
 
 	public void setCondition(String condition) {
 		this.condition = condition;
+	}
+
+	public MultipartFile getBookImage() {
+		return bookImage;
+	}
+
+	public void setBookImage(MultipartFile bookImage) {
+		this.bookImage = bookImage;
 	}
 
 	
