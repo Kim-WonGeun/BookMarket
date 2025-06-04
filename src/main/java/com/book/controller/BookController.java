@@ -21,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.book.domain.Book;
+import com.book.exception.CategoryException;
 import com.book.service.BookService;
 
 @Controller
@@ -58,6 +59,11 @@ public class BookController {
 	public String requestBooksByCategory(@PathVariable("category") String bookCategory, Model model) {
 		
 		List<Book> booksByCategory = bookService.getBookListByCategory(bookCategory);
+		
+		if(booksByCategory == null || booksByCategory.isEmpty()) {
+			throw new CategoryException();
+		}
+		
 		model.addAttribute("bookList", booksByCategory);
 		
 		return "books";
