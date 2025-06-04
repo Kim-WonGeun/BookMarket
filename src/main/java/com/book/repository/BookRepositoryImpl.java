@@ -9,12 +9,12 @@ import java.util.Set;
 import org.springframework.stereotype.Repository;
 
 import com.book.domain.Book;
+import com.book.exception.BookIdException;
 
 @Repository
 public class BookRepositoryImpl implements BookRepository {
 
 	private List<Book> listOfBooks = new ArrayList<Book>();
-	
 	
 	public BookRepositoryImpl() {
 		
@@ -61,13 +61,11 @@ public class BookRepositoryImpl implements BookRepository {
 		
 	}
 	
-	
 	@Override
 	public List<Book> getAllBookList() {
 		// TODO Auto-generated method stub
 		return listOfBooks;
 	}
-
 
 	@Override
 	public List<Book> getBookListByCategory(String category) {
@@ -85,7 +83,6 @@ public class BookRepositoryImpl implements BookRepository {
 		return booksByCategory;
 	}
 
-
 	@Override
 	public Set<Book> getBookListByFilter(Map<String, List<String>> filter) {
 		// TODO Auto-generated method stub
@@ -93,7 +90,6 @@ public class BookRepositoryImpl implements BookRepository {
 		Set<Book> booksByCategory = new HashSet<Book>();
 		
 		Set<String> booksByFilter = filter.keySet();
-		
 		
 		if(booksByFilter.contains("publisher")) {
 			
@@ -130,13 +126,12 @@ public class BookRepositoryImpl implements BookRepository {
 		return booksByCategory;
 	}
 
-
 	@Override
 	public Book getBookById(String bookId) {
 		// TODO Auto-generated method stub
 		Book bookInfo = null;
 		
-		for(int i = 0; 0 < listOfBooks.size(); i++) {
+		for(int i = 0; i < listOfBooks.size(); i++) {
 			Book book = listOfBooks.get(i);
 			
 			if(book != null && book.getBookId() != null && book.getBookId().equals(bookId) ) {
@@ -147,13 +142,11 @@ public class BookRepositoryImpl implements BookRepository {
 		}
 		
 		if(bookInfo == null) {
-			throw new IllegalArgumentException("도서 ID가" + bookId + "인 해당 도서를 찾을 수 없습니다.");
-			
+			throw new BookIdException(bookId);
 		}
 		
 		return bookInfo;
 	}
-
 
 	@Override
 	public void setNewBook(Book book) {
@@ -161,6 +154,5 @@ public class BookRepositoryImpl implements BookRepository {
 		listOfBooks.add(book);
 		
 	}
-	
 	
 }
