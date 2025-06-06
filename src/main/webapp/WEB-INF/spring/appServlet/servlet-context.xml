@@ -12,6 +12,10 @@
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<property name="maxUploadSize" value="10240000"/>
 	</bean>
+	
+	<mvc:interceptors>
+		<bean class="com.book.interceptor.MonitoringInterceptor"/>
+	</mvc:interceptors>
 
     <!-- 컴포넌트 스캔 설정 -->
     <context:component-scan base-package="com.book.*" />
