@@ -15,6 +15,7 @@
 	
 	<mvc:interceptors>
 		<bean class="com.book.interceptor.MonitoringInterceptor"/>
+		<bean class="com.book.interceptor.AuditingInterceptor"/>
 	</mvc:interceptors>
 
     <!-- 컴포넌트 스캔 설정 -->
