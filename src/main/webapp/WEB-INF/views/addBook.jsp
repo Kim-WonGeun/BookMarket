@@ -38,6 +38,10 @@
 			</form:form>
 		</div>
 		
+		<div class="float-right" style="padding-right:30px">
+			<a href="?language=ko">Korean</a>|<a href="?language=en">English</a>
+		</div>
+		
 		<br><br>
 	
 		<form:form modelAttribute="NewBook" action="./add?${_csrf.parameterName}=${_csrf.token}" class="form-horizontal" enctype="multipart/form-data">
