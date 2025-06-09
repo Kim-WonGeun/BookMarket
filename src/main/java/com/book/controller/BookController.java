@@ -6,10 +6,12 @@ import java.util.Map;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -101,7 +103,11 @@ public class BookController {
 	}
 	
 	@PostMapping("/add")
-	public String submitAddNewBook(@ModelAttribute("NewBook") Book book) {
+	public String submitAddNewBook(@Valid @ModelAttribute("NewBook") Book book, BindingResult result) {
+		
+		if(result.hasErrors()) {
+			return "addBook";
+		}
 		
 		MultipartFile bookImage = book.getBookImage();
 		

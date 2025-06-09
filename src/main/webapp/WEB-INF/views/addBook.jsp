@@ -59,6 +59,9 @@
 			<div class="col-sm-3">
 				<form:input path="bookId" class="form-control"/>
 			</div>
+			<div class="col-sm-6">
+				<form:errors path="bookId" cssClass="text-danger"/>
+			</div>
 		</div>
 		
 		<div class="form-group row">
@@ -68,6 +71,9 @@
 			<div class="col-sm-3">
 				<form:input path="name" class="form-control"/>
 			</div>
+			<div class="col-sm-6">
+				<form:errors path="name" cssClass="text-danger"/>
+			</div>			
 		</div>
 
 		<div class="form-group row">
@@ -77,6 +83,9 @@
 			<div class="col-sm-3">
 				<form:input path="unitPrice" class="form-control"/>
 			</div>
+			<div class="col-sm-6">
+				<form:errors path="unitPrice" cssClass="text-danger"/>
+			</div>			
 		</div>
 
 		<div class="form-group row">
