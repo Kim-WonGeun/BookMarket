@@ -29,6 +29,7 @@ import com.book.domain.Book;
 import com.book.exception.BookIdException;
 import com.book.exception.CategoryException;
 import com.book.service.BookService;
+import com.book.validator.UnitsInStockValidator;
 
 @Controller
 @RequestMapping("/books")
@@ -36,6 +37,10 @@ public class BookController {
 
 	@Autowired
 	private BookService bookService;
+
+	// UnitsInStockValidator의 인스턴스 선언
+	@Autowired
+	private UnitsInStockValidator unitsInStockValidator; 
 	
 	@GetMapping
 	public String requestBookList(Model model) {
@@ -138,6 +143,8 @@ public class BookController {
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
 		
+		binder.setValidator(unitsInStockValidator);	// 생성한 unitsInStockValidator 설정
+			
 		binder.setAllowedFields("bookId" , "name" , "unitPrice" 
 								, "author" , "description" , "publisher" 
 								, "category" , "unitsInStock" , "totalPages"
