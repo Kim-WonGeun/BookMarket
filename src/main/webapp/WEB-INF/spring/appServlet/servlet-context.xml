@@ -25,7 +25,7 @@
     <context:component-scan base-package="com.book.*" />
 
     <!-- @RequestMapping 등 활성화 -->
-    <mvc:annotation-driven />
+    <mvc:annotation-driven  enable-matrix-variables="true" validator="validator"/>
 
     <!-- 정적 자원 매핑 -->
     <mvc:resources mapping="/resources/**" location="/resources/" />
@@ -47,9 +47,19 @@
     	<property name="basename" value="messages"/>
     	<property name="defaultEncoding" value="UTF-8"/>
     </bean>
+    
+    <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" primary="true">
+    	<property name="validationMessageSource" ref="messageSource"/>
+    </bean>
+    
+    <bean id="unitsInStockValidator" class="com.book.validator.UnitsInStockValidator"/>
+    
+    <bean id="bookValidator" class="com.book.validator.BookValidator">
+    	<property name="springValidators">
+	    	<set>
+	    		<ref bean="unitsInStockValidator"/>
+	    	</set>
+	    </property>
+    </bean>
 
-<!-- 	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping">
-	    <property name="removeSemicolonContent" value="false"/>
-	</bean>
- -->
 </beans>

@@ -13,7 +13,7 @@ import javax.validation.Constraint;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 public @interface BookId {
-	String message() default "";
+	String message() default "{BookId.NewBook.bookId}";
 	Class<?>[] groups() default {};
 	Class<?>[] payload() default {};
 }
