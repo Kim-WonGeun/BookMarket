@@ -23,5 +23,11 @@ public class CartServiceImpl implements CartService {
 		// TODO Auto-generated method stub
 		return cartRepository.read(cartId);
 	}
+
+	@Override
+	public void update(String cartId, Cart cart) {
+		// TODO Auto-generated method stub
+		cartRepository.update(cartId, cart);
+	}
 	
 }
