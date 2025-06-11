@@ -30,7 +30,8 @@
 	<div class="container">
 		<div>
 			<form:form name="clearForm" method="delete">
-				<a herf="javascript:clearCart()" class="btn btn-danger pull-left">삭제하기</a>
+				<!-- <input type="hidden" name="_method" value="delete" /> -->
+				<a href="javascript:clearCart()" class="btn btn-danger pull-left">삭제하기</a>
 			</form:form>
 			<a href="#" class="btn btn-success float-right">주문하기</a>
 		</div>
@@ -44,7 +45,9 @@
 				<th>비고</th>
 			</tr>
 		  	<form:form name="removeForm" method="put">
-		            <c:forEach items="${cart.cartItems}" var="item">
+		  		<!-- <input type="hidden" name="_method" value="put" /> -->
+		
+	            <c:forEach items="${cart.cartItems}" var="item">
 		            <tr>
 		                <td>${item.value.book.bookId}-${item.value.book.name}</td>
 		                <td>${item.value.book.unitPrice}</td>
@@ -52,7 +55,7 @@
 		                <td>${item.value.totalPrice}</td>
 		                <td><a href="javascript:removeFromCart('../cart/remove/${item.value.book.bookId}')" class="badge badge-danger">삭제</a></td> 
 		            </tr>
-            </c:forEach>
+	            </c:forEach>
         	</form:form>
 			<tr>
 				<th></th>

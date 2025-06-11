@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.book.domain.Cart;
+import com.book.exception.CartException;
 import com.book.repository.CartRepository;
 
 @Service
@@ -35,6 +36,18 @@ public class CartServiceImpl implements CartService {
 		// TODO Auto-generated method stub
 		cartRepository.delete(cartId);
 		
+	}
+
+	@Override
+	public Cart validateCart(String cartId) {
+		// TODO Auto-generated method stub
+		Cart cart = cartRepository.read(cartId);
+		
+		if(cart == null || cart.getCartItems().size() == 0) {
+			throw new CartException(cartId);
+		}
+		
+		return cart;
 	}
 	
 }

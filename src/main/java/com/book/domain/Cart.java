@@ -1,10 +1,13 @@
 package com.book.domain;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-public class Cart {
+public class Cart implements Serializable {
+	
+	private static final long serialVersionUID = 2155125089108199199L;
 
 	private String cartId;	// 장바구니 ID
 	private Map<String, CartItem> cartItems;	// 장바구니 항목
