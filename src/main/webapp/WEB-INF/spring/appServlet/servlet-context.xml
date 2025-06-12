@@ -65,7 +65,7 @@
 	    </property>
     </bean>
 	
-	<webflow:flow-registry id="flowRegistry">
+	<webflow:flow-registry id="flowRegistry" flow-builder-services="flowBuilderServices">
 		<webflow:flow-location path="/WEB-INF/flows/order/order-flow.xml" id="order"/>
 	</webflow:flow-registry>
 	
@@ -78,7 +78,6 @@
 		<property name="flowExecutor" ref="flowExecutor"/>
 	</bean>
 	
-	
 	<bean id="tilesViewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
 		<property name="viewClass" value="org.springframework.web.servlet.view.tiles3.TilesView"/>
 		<property name="order" value="1"/>
@@ -86,6 +85,12 @@
 	
 	<bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
 		<property name="definitions" value="/WEB-INF/tiles/tiles.xml"/>
+	</bean>
+
+	<webflow:flow-builder-services id="flowBuilderServices" view-factory-creator="viewFactoryCreator"/>
+	
+	<bean id="viewFactoryCreator" class="org.springframework.webflow.mvc.builder.MvcViewFactoryCreator">
+		<property name="viewResolvers" ref="tilesViewResolver"/>
 	</bean>
 
 </beans>
