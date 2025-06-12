@@ -12,19 +12,6 @@
 
 <body>
 
-	<nav class="navbar navbar-expand navbar-dark bg-dark">
-		<div class="container">
-			<div class="navbar-header">
-				<a class="navbar-brand" href="./home">Home</a>
-			</div>
-		</div>
-	</nav>
-
-	<div class="jumbotron">
-		<div class="container">
-			<h1 class="display-3">도서 목록</h1>
-		</div>
-	</div>
 
 	<div class="container">
 		<div class="row" align="center">
@@ -52,9 +39,6 @@
 			</c:forEach>
 		</div>
 	<hr>
-	<footer>
-		<p>&copy; WebMarket</p>
-	</footer>
 	</div>
 
 </body>
