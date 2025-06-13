@@ -75,6 +75,9 @@ public class BookRepositoryImpl implements BookRepository {
 	@Override
 	public List<Book> getAllBookList() {
 		// TODO Auto-generated method stub
+		String SQL = "SELECT * FROM book";
+		List<Book> listOfBooks = template.query(SQL, new BookRowMapper());
+		
 		return listOfBooks;
 	}
 
@@ -83,13 +86,16 @@ public class BookRepositoryImpl implements BookRepository {
 		// TODO Auto-generated method stub
 		List<Book> booksByCategory = new ArrayList<Book>();		
 		
-		for(int i = 0; i < listOfBooks.size(); i++) {
-			Book book = listOfBooks.get(i);
-			
-			if(category.equalsIgnoreCase(book.getCategory())) {
-				booksByCategory.add(book);
-			}
-		}	
+		String SQL = "SELECT * FROM book WHERE b_category LIKE '%" + category + "%'";
+		booksByCategory = template.query(SQL, new BookRowMapper());
+		
+//		for(int i = 0; i < listOfBooks.size(); i++) {
+//			Book book = listOfBooks.get(i);
+//			
+//			if(category.equalsIgnoreCase(book.getCategory())) {
+//				booksByCategory.add(book);
+//			}
+//		}	
 		
 		return booksByCategory;
 	}
@@ -99,39 +105,59 @@ public class BookRepositoryImpl implements BookRepository {
 		// TODO Auto-generated method stub
 		Set<Book> booksByPublisher = new HashSet<Book>();
 		Set<Book> booksByCategory = new HashSet<Book>();
+		Set<String> criterias = filter.keySet();
 		
-		Set<String> booksByFilter = filter.keySet();
+//		Set<String> booksByFilter = filter.keySet();
 		
-		if(booksByFilter.contains("publisher")) {
+		if(criterias.contains("publisher")) {
 			
 			for(int j = 0; j < filter.get("publisher").size(); j++) {
 				String publisherName = filter.get("publisher").get(j);
+				String SQL = "SELECT * FROM book WHERE b_publisher LIKE '%" + publisherName + "%'";
 				
-				for(int i = 0; i <listOfBooks.size(); i++) {
-					Book book = listOfBooks.get(i);
-					
-					if(publisherName.equalsIgnoreCase(book.getPublisher())) {
-						booksByPublisher.add(book);
-					}
-					
-				}
-				
+				booksByPublisher.addAll(template.query(SQL, new BookRowMapper()));
 			}
-			
 		}
 		
-		if(booksByFilter.contains("category")) {
-			
-			System.out.println("###category Start #####");
+		if(criterias.contains("category")) {
 			
 			for(int i = 0; i < filter.get("category").size(); i++) {
 				String category = filter.get("category").get(i);
-				
-				List<Book> list = getBookListByCategory(category);
-				booksByCategory.addAll(list);
+				String SQL = "SELECT * FROM book WHERE b_publisher LIKE '%" + category + "%'";
+				booksByPublisher.addAll(template.query(SQL, new BookRowMapper()));
 			}
-			
 		}
+		
+//		if(booksByFilter.contains("publisher")) {
+//			
+//			for(int j = 0; j < filter.get("publisher").size(); j++) {
+//				String publisherName = filter.get("publisher").get(j);
+//				
+//				for(int i = 0; i <listOfBooks.size(); i++) {
+//					Book book = listOfBooks.get(i);
+//					
+//					if(publisherName.equalsIgnoreCase(book.getPublisher())) {
+//						booksByPublisher.add(book);
+//					}
+//					
+//				}
+//				
+//			}
+//			
+//		}
+//		
+//		if(booksByFilter.contains("category")) {
+//			
+//			System.out.println("###category Start #####");
+//			
+//			for(int i = 0; i < filter.get("category").size(); i++) {
+//				String category = filter.get("category").get(i);
+//				
+//				List<Book> list = getBookListByCategory(category);
+//				booksByCategory.addAll(list);
+//			}
+//			
+//		}
 		
 		booksByCategory.retainAll(booksByPublisher);
 		return booksByCategory;
@@ -142,15 +168,24 @@ public class BookRepositoryImpl implements BookRepository {
 		// TODO Auto-generated method stub
 		Book bookInfo = null;
 		
-		for(int i = 0; i < listOfBooks.size(); i++) {
-			Book book = listOfBooks.get(i);
+		String SQL = "SELECT count(*) FROM book WHERE b_bookId=?";
+		int rowCount = template.queryForObject(SQL, Integer.class, bookId);
+		
+		if(rowCount != 0) {
+			SQL = "SELECT * FROM book WHERE b_bookId=?";
 			
-			if(book != null && book.getBookId() != null && book.getBookId().equals(bookId) ) {
-				bookInfo = book;
-				break;
-			}
-			
+			bookInfo = template.queryForObject(SQL, new Object[] {bookId}, new BookRowMapper());
 		}
+		
+//		for(int i = 0; i < listOfBooks.size(); i++) {
+//			Book book = listOfBooks.get(i);
+//			
+//			if(book != null && book.getBookId() != null && book.getBookId().equals(bookId) ) {
+//				bookInfo = book;
+//				break;
+//			}
+//			
+//		}
 		
 		if(bookInfo == null) {
 			throw new BookIdException(bookId);
