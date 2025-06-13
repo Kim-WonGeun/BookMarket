@@ -6,6 +6,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.sql.DataSource;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.book.domain.Book;
@@ -15,6 +19,13 @@ import com.book.exception.BookIdException;
 public class BookRepositoryImpl implements BookRepository {
 
 	private List<Book> listOfBooks = new ArrayList<Book>();
+	
+	private JdbcTemplate template;
+	
+	@Autowired
+	public void setJdbctemplate(DataSource dataSource) {
+		this.template = new JdbcTemplate(dataSource);
+	}
 	
 	public BookRepositoryImpl() {
 		

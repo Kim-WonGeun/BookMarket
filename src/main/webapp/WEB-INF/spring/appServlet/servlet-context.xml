@@ -93,4 +93,15 @@
 		<property name="viewResolvers" ref="tilesViewResolver"/>
 	</bean>
 
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DrivenManagerDataSource">
+		<property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
+		<property name="url" value="jdbc:mysql://localhost3306/bookmarketDB?serverTimezone=UTC"/>
+		<property name="username" value="root"/>
+		<property name="password" value="dnjsrms12!"/>
+	</bean>
+	
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+
 </beans>
