@@ -20,4 +20,6 @@ public interface BookRepository {
 	
 	void setUpdateBook(Book book);
 	
+	void setDeleteBook(String bookID);
+	
 }

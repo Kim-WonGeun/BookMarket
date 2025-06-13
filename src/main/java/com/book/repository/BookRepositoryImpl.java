@@ -223,5 +223,12 @@ public class BookRepositoryImpl implements BookRepository {
         }		
 		
 	}
+
+	@Override
+	public void setDeleteBook(String bookID) {
+		// TODO Auto-generated method stub
+        String SQL = "DELETE from Book where b_bookId = ? ";
+        this.template.update(SQL, bookID);		
+	}
 	
 }

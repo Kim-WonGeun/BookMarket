@@ -20,4 +20,6 @@ public interface BookService {
 	
 	void setUpdateBook(Book book);
 	
+	void setDeleteBook(String bookID);
+	
 }
