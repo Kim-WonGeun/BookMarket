@@ -197,6 +197,11 @@ public class BookRepositoryImpl implements BookRepository {
 	@Override
 	public void setNewBook(Book book) {
 		// TODO Auto-generated method stub
+		
+        String SQL = "INSERT INTO book (b_bookId, b_name, b_unitPrice, b_author, b_description, b_publisher, b_category, b_unitsInStock, b_releaseDate, b_condition, b_fileName) " + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+        template.update(SQL, book.getBookId(), book.getName(), book.getUnitPrice(), book.getAuthor(), book.getDescription(), book.getPublisher(), book.getCategory(), book.getUnitsInStock(), book.getReleaseDate(), book.getCondition(), book.getFileName());		
+		
 		listOfBooks.add(book);
 		
 	}

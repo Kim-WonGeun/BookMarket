@@ -123,6 +123,7 @@ public class BookController {
 			
 			try {
 				bookImage.transferTo(saveFile);
+				book.setFileName(saveName);
 			}catch (Exception e) {
 				throw new RuntimeException("도서 이미지 업로드가 실패하였습니다.");
 			}
