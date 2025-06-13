@@ -18,4 +18,6 @@ public interface BookRepository {
 	
 	void setNewBook(Book book);
 	
+	void setUpdateBook(Book book);
+	
 }

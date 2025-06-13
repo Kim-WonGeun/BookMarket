@@ -18,4 +18,6 @@ public interface BookService {
 	
 	void setNewBook(Book book);
 	
+	void setUpdateBook(Book book);
+	
 }

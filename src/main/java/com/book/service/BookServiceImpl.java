@@ -52,4 +52,11 @@ public class BookServiceImpl implements BookService {
 		
 	}
 
+	@Override
+	public void setUpdateBook(Book book) {
+		// TODO Auto-generated method stub
+		bookRepository.setUpdateBook(book);
+		
+	}
+
 }
